@@ -1,70 +1,49 @@
 #include <stdio.h>
-#include <ctype.h>
+#include <string.h>
 #include "stack.h"
 
-void push(int item)
-{
+#Initially have top index set to -1
 
-    if (top >= MAXSTACK - 1) {
-        printf("stack over flow");
-        return;
-    }
+void initialize() {
+ st.top = -1;
+}
+
+#To check if stack is Full or not
+
+int isFull() {   
+    if(st.top >= MAXSIZE-1)
+        return TRUE;
+    else
+        return FALSE;
+}
+ 
+#To check if stack is empty or not
+
+int isEmpty() {
+ if(st.top == -1)
+     return TRUE;
+ else
+     return FALSE;
+}
+
+#To Push items to stack
+
+void push(int num) {
+    if (isFull())
+        printf("Stack is Full...\n");
     else {
-        top = top + 1;
-        stack[top] = item;
+        st.array[st.top + 1] = num;
+        st.top++;
     }
 }
 
-int pop()
-{
-    int item;
-    if (top < 0) {
-        printf("stack under flow");
-    }
+#To pop items from stack if we have ("}", ")", "]")
+
+int pop() {
+    if (isEmpty())
+        printf("Stack is Empty...\n");
     else {
-        item = stack[top];
-        top = top - 1;
-        return item;
+     st.top = st.top - 1;
+        return st.array[st.top+1];
     }
-}
-
-void EvalPostfix(char postfix[])
-{
-
-    int i;
-    char ch;
-    int val;
-    int A, B;
-    for (i = 0; postfix[i] != ')'; i++) {
-        ch = postfix[i];
-        if (isdigit(ch)) {
-            push(ch - '0');
-        }
-        else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
-          A = pop();
-            B = pop();
-
-            switch (ch) 
-            {
-            case '*':
-                val = B * A;
-                break;
-
-            case '/':
-                val = B / A;
-                break;
-
-            case '+':
-                val = B + A;
-                break;
-
-            case '-':
-                val = B - A;
-                break;
-            }
-
-            push(val);
-        }
-    }
-    printf(" \n Result of expression evaluation : %d \n", pop());
 }
