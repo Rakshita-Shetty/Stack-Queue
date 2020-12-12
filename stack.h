@@ -1,13 +1,7 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <ctype.h>
+#define MAXSTACK 100 
+#define POSTFIXSIZE 100 
 
-#define MAXSIZE 100
-#define TRUE 1
-#define FALSE 0
-
-struct Stack{
-    int top;
-    int array[MAXSIZE];
-    
-}st;
-
+int stack[MAXSTACK];
+int top = -1;

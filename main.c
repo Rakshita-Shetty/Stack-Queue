@@ -2,19 +2,25 @@
 #include <string.h>
 #include "stack.h"
 
-int main() {
-    char inputString[100], c;
-    int i, length;
-    initialize();
-    length = strlen(inputString);
-    
-    for(i = 0; i < length; i++){
-        if(inputString[i] == '{' && inputString[i] == '(' && inputString[i] == '[' )
-            push(inputString[i]);
-        else if(inputString[i] == '}' && inputString[i] == ')' && inputString[i] == ']')
-            pop();
-        else {
-            printf("Error : Invalid Character !! \n");
-            return 0;
-        }
+int main()
+{
+
+    int i;
+    char postfix[POSTFIXSIZE];
+    printf("Four operators(*, /, +, -) in an expression and operand is single digit only.\n");   #Input example -> 6523+8*+3+*
+    printf(" \nEnter postfix expression,\npress right parenthesis ')' for end expression : ");
+
+    for (i = 0; i <= POSTFIXSIZE - 1; i++) {
+        scanf("%c", &postfix[i]);
+
+        if (postfix[i] == ')')
+        {
+            break;
+        } 
     }
+
+    EvalPostfix(postfix);
+
+    return 0;
+}
+
